@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Employee Management Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <form action="{{ url_for('add_employee') }}" method="post">
+      <h3>EMPLOYEE MANAGEMENT FORM</h3>
+      <h5>(For Internal HR Use Only)</h5>
+      <hr/>
+
+      <fieldset class="custfieldset">
+        <legend>For Office Use Only</legend>
+        <label for="department">Department</label>
+        <input type="text" id="department" name="department" required><br><br>
+        <label for="code">Employee Code</label>
+        <input type="number" id="code" name="code" min="1000" max="9999" required>
+      </fieldset>
+
+      <br><br>
+      <fieldset class="personal">
+        <legend>Employee Details</legend>
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="job">Job Title:</label>
+        <input type="text" id="job" name="job" required>
+      </fieldset>
+
+      <br>
+      <button type="submit">Submit</button>
+      <hr/>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </form>
+  </body>
+</html>
